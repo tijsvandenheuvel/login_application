@@ -44,27 +44,42 @@ for the database we chose **MySQL** because we know how to use this and is open-
 **bcrypt** library for hashing and salting passwords
 **express session** library for managing sessions
 
-2. make UI web page
+>nodelogin with hmtl & js file OR full express file structure(app) ? 
 
-3. create the checks
+1. make front end web page
+    create html login & registering forms
+    >html pages or templating engine (ejs) ?
+    execute database setup in MySQL
 
-- NIST 
-- HIBP
-- check if username already in database
-
+2. create authentication middleware
+    create Express.js file (login.js) for middleware
+    establish connection wit mysql
+    be able to login / authenticate with username & password
+    
 4. slow hashing & salted
+    use **bcrypt** library for hashing & salting
+    >implement BCrypt hash 
 
+3. write database connection & queries
+    authenticate by checking username & password in database
+    - check if username is in db
+    - check if username & hashedpassword are same as in database
+    - post username & hashedpassword
 
-5. persist to database
+4. create the checks
+- NIST (passwoord tussen 8 en 64 tekens)
+- HIBP
+  > leer met API werken
+- 
 
-- save account to database
+1. persist to database
+
+save account to database
 we use parameterised queries to counter SQL-injection
 
-1. create authentication 
-
-be able to login / authenticate with username & password
-
-7. deploy application 
+1. deploy application 
+> get HTTPS, TLS certificate
+search & get free host provider
 
 ## results
 

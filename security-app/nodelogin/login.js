@@ -5,6 +5,21 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
 
+// hashing with bcrypt
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+
+bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+    // Store hash in your password DB.
+});
+// to check
+// Load hash from your password DB.
+bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
+    // result == true
+});
+
 //connect to db
 var connection = mysql.createConnection({
 	host     : 'localhost',
