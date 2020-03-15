@@ -26,70 +26,122 @@ deploy application
 
 ## development steps
 
-1. figure out what we need
+1. figure out scope & work
 
-- html form for registering
-- html from for log in
-- write a function to check if given password complies to NIST guidelines
-- connect to HIBP-API to validate with blacklist
-- connection to database
-- slow & salted hashing algorithm to securely store account info
+   - html login & register page
+   - check if given password complies to NIST guidelines
+   - connect to HIBP-API to validate with blacklist
+   - connection to database 
+   - implement slow & salted hashing algorithm bcrypt
+   - session mgmt
+   - https connection with TLS certificate
 
-1. choose development technologies
+2. choose main development technologies
 
 we decided to use the **Express.js** and **Node.js** framework because it's the simplest and we have the most experience with this
 
 for the database we chose **MySQL** because we know how to use this and is open-source
 
-**bcrypt** library for hashing and salting passwords
-**express session** library for managing sessions
+**bcrypt** library/algorithm for hashing and salting passwords
 
->nodelogin with hmtl & js file OR full express file structure(app) ? 
 
 1. make front end web page
     create html login & registering forms
-    >html pages or templating engine (ejs) ?
+    with **ejs** templating engine
     execute database setup in MySQL
 
-2. create authentication middleware
+2. establish secure connection
+    only send passwords using strong transport: **TLS** + **https**
+    this ensures encrypted session ID token
+
+3. create authentication middleware
     create Express.js file (login.js) for middleware
-    establish connection wit mysql
+    establish connection with **MySQL** database
+
     be able to login / authenticate with username & password
+
+    make username case insensitive
     
 4. slow hashing & salted
     use **bcrypt** library for hashing & salting
     >implement BCrypt hash 
 
-3. write database connection & queries
+5. write database connection & queries
     authenticate by checking username & password in database
     - check if username is in db
     - check if username & hashedpassword are same as in database
     - post username & hashedpassword
+  
+    use **sequelize** for programming queries
+    we use parameterised queries to counter SQL-injection
 
-4. create the checks
-- NIST (passwoord tussen 8 en 64 tekens)
-- HIBP
-  > leer met API werken
-- 
+    > use generic error messages
 
-1. persist to database
+6. create the checks
+   - NIST (passwoord tussen 8 en 64 tekens)
+   - HIBP: eerst hashen en dan check met API 
+  
+    > use generic error messages
 
-save account to database
-we use parameterised queries to counter SQL-injection
+7. authorization
+    session management
+    token management
+    
+    application flow
 
-1. deploy application 
-> get HTTPS, TLS certificate
-search & get free host provider
+    **express session** library for managing sessions
+
+    **passport.js** or **Auth0** frameworks ?
+
+    **OpenIDConnect** protocol
+    - identity token
+    - acces token
+
+    cookie option secure: true -> https required
+    session:
+        secret: 'thisisthecookiesecret',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: true }
+    > figure out correct cookie / session options
+
+    > zoek uit: session store ? 
+    
+
+8. deploy application 
+    > get HTTPS, TLS certificate
+    search & get free host provider
 
 ## results
 
+### application flow
+1. manage session 
+    - cookies
+    - tokens
 
+### register flow
+1. ejs form 
+    - username
+    - password
+2. check NIST (password between 8 & 64 chars)
+3. check if username allready in db (case insensitive)
+4. check if password in HIBP API (sha1 first 5 chars)
+5. slow hash + salt with bcrypt
+6. persist to database
+
+### login flow
+1. ejs form
+    - username
+    - password
+2. check if username & password are in db (parameterised)
+3. update session
+4. go to home screen
 
 ## 
 
 herhaal express
 
-maak html paginas       tijs
+maak html paginas       
 
 javascripts voor NIST checks        tijs
 
@@ -105,3 +157,6 @@ zoek uit hoe https certificaat fixe         jorg
 
 theorie en andere security guidelines tijs & jorg
 
+## sources
+
+[owasp cheat sheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Authentication_Cheat_Sheet.md)
