@@ -4,7 +4,7 @@ authors:
 Tijs Van den Heuvel
 Jorg Vergracht
 
-[link to source code]()
+[link to source code](https://github.com/tijsvandenheuvel/team_3_secure_login)
 [link to application]()
 
 ## assignment
@@ -13,60 +13,56 @@ a web application where
 - users can register themselves with a username and password
 - users can authenticate themselves using their registered username and password. 
 
-the application should store passwords
+the application should securely store passwords
 
 passwords conforms to NIST guidelines
 [doc](https://pages.nist.gov/800-63-3/sp800-63b.html) section 5.1.1.1
 
-the passwords from [HIBP](https://haveibeenpwned.com/) should be used as blacklist (list of 555,278,657 compromised passwords)
+the passwords from [HIBP](https://haveibeenpwned.com/) should be used as blacklist 
 
 use security guidelines as learned in class
 
-deploy application 
+deploy application on internet
 
 ## development steps
 
 1. figure out scope & work
-
    - html login & register page
    - check if given password complies to NIST guidelines
    - connect to HIBP-API to validate with blacklist
    - connection to database 
    - implement slow & salted hashing algorithm bcrypt
-   - session mgmt
+   - session mgmt with browser cookies
    - https connection with TLS certificate
 
-2. choose main development technologies
-
-we decided to use the **Express.js** and **Node.js** framework because it's the simplest and we have the most experience with this
-
-for the database we chose **MySQL** because we know how to use this and is open-source
-
-**bcrypt** library/algorithm for hashing and salting passwords
-
-
-1. make front end web page
-    create html login & registering forms
-    with **ejs** templating engine
-    execute database setup in MySQL
-
-2. establish secure connection
+2. make front end web page
+    create html pages with **ejs** view engine
+    - login form
+    - register form
+    - home / index page
+   
+3. establish secure connection
     only send passwords using strong transport: **TLS** + **https**
     this ensures encrypted session ID token
 
-3. create authentication middleware
-    create Express.js file (login.js) for middleware
+4. create authentication middleware
+    create **Express.js** file for middleware (server.js) 
     establish connection with **MySQL** database
+    - express-session: store & acces sessions with browser cookies
+    - bcrypt: hash & salt password
+    - sequelize: ORM to manage models & migrations
+    - ejs: view engine to add node code to html
+    - mysql2: used by sequelize to communicate to Mysql 
 
-    be able to login / authenticate with username & password
+    login & register requests handled by account_controller.js
 
-    make username case insensitive
+    >make username case insensitive
     
-4. slow hashing & salted
+5. slow hashing & salted
     use **bcrypt** library for hashing & salting
     >implement BCrypt hash 
 
-5. write database connection & queries
+6. write database connection & queries
     authenticate by checking username & password in database
     - check if username is in db
     - check if username & hashedpassword are same as in database
@@ -77,13 +73,13 @@ for the database we chose **MySQL** because we know how to use this and is open-
 
     > use generic error messages
 
-6. create the checks
+7. create the checks
    - NIST (passwoord tussen 8 en 64 tekens)
    - HIBP: eerst hashen en dan check met API 
   
     > use generic error messages
 
-7. authorization
+8. authorization
     session management
     token management
     
@@ -108,16 +104,27 @@ for the database we chose **MySQL** because we know how to use this and is open-
     > zoek uit: session store ? 
     
 
-8. deploy application 
+9. deploy application 
     > get HTTPS, TLS certificate
     search & get free host provider
 
 ## results
 
+### development technologies
+We decided to use the **Express.js** and **Node.js** framework because it is open source, well supported, lots of libraries and we have the most experience with this.
+
+For the database layer we chose **MySQL** because we know how to use this and is open-source
+We use **sequelize** for Object Relational Mapping with Node
+
+We use the **bcrypt** library/algorithm for hashing and salting passwords and securely storing and checking with database
+
 ### application flow
-1. manage session 
-    - cookies
-    - tokens
+1. startup with node server.js
+1. init express
+2. init session
+3. if no logged in session redirect to register page
+4. if logged in redirect to homepage
+5. login & register requests handled by account_controller
 
 ### register flow
 1. ejs form 
@@ -137,11 +144,8 @@ for the database we chose **MySQL** because we know how to use this and is open-
 3. update session
 4. go to home screen
 
-## 
 
-herhaal express
-
-maak html paginas       
+## TO DO 
 
 javascripts voor NIST checks        tijs
 
@@ -160,3 +164,5 @@ theorie en andere security guidelines tijs & jorg
 ## sources
 
 [owasp cheat sheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Authentication_Cheat_Sheet.md)
+
+[express, bcrypt, mysql tutorial](https://medium.com/@siddarthasiddu96/user-login-and-registration-with-nodejs-using-express-bycrpt-and-mysql-529c872db5a0)
