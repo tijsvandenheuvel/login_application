@@ -33,7 +33,7 @@ app.use('/',AccountRoutes.AccountRoutes);
 
 app.use(function(req,res,next){
     if(req.session.username == null || req.session.username.length ==0 ){
-        res.redirect('/register'); 
+      res.redirect('/register');
     }
     else{
       next();

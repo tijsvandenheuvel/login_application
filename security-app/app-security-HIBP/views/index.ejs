@@ -12,5 +12,9 @@
   </head>
   <body class="container" style="width:98%">
     <h1>welcome, logged in as <%= user_name %></h1>
+    <form action="/logout/" method="POST">
+      <input type="submit" value="log out" >
+    </form>
+
   </body>
 </html>

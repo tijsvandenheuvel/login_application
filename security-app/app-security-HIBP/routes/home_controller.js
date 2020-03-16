@@ -10,5 +10,10 @@ HomeRoutes.get('/',function(req,res){
     let username = req.session.username;
     res.render('index',{user_name:username});
 });
+HomeRoutes.post('/logout',function(req,res){
+    req.session.username=null;
+    res.redirect('/');
+});
+
 
 module.exports = {"HomeRoutes" : HomeRoutes};

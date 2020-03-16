@@ -10,16 +10,15 @@ const bcrypt = require('bcrypt');
 var accountRoutes = express.Router();
 
 accountRoutes.get('/login',function(req,res){
-    res.render('login');
+    res.render('login',{error: ''});
 });
 accountRoutes.get('/register',function(req,res){  
-    res.render('register',{errors: ""});
+    res.render('register',{error: ""});
 });
 
 accountRoutes.post('/register',function(req,res){
     var matched_users_promise = models.User.findAll({
         where:{username: req.body.username}
-            
     });
     matched_users_promise.then(function(users){ 
         if(users.length == 0){
@@ -28,13 +27,12 @@ accountRoutes.post('/register',function(req,res){
                 username: req.body.username,
                 password: passwordHash
             }).then(function(){
-                let newSession = req.session;
-                newSession.username = req.body.username;
+                req.session.username = req.body.username;
                 res.redirect('/');
             });
         }
         else{
-            res.render('register',{errors: "Username already in use"});
+            res.render('register',{error: "Username already in use"});
         }
     })
 });
@@ -44,23 +42,19 @@ accountRoutes.post('/login',function(req,res){
         where: {username: req.body.username}
     });
     matched_users_promise.then(function(users){ 
-        console.log(users);
         if(users.length > 0){
             let user = users[0];
             let passwordHash = user.password;
             if(bcrypt.compareSync(req.body.password,passwordHash)){
                 req.session.username = req.body.username;
-                console.log("joepie")
                 res.redirect('/');
             }
             else{
-                console.log("ai");
-                res.redirect('/register');
+                res.render('login', {error: 'Login failed; Invalid user ID or password'});
             }
         }
         else{
-            console.log("oei oei");
-            res.redirect('/login');
+            res.render('login', {error: 'Login failed; empty user ID or password'});
         }
     });
 });
