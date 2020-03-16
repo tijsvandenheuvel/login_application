@@ -5,10 +5,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-var indexRouter = require("./routes/");
-
+var port = process.env.PORT || 3000;
 var app = express();
-
+var indexRouter = require("./routes/");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -20,7 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+var IndexRoutes = require('./routes/index');
+app.use("/", IndexRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,3 +39,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+app.listen(port);

@@ -56,7 +56,8 @@ deploy application on internet
 
     login & register requests handled by account_controller.js
 
-    >make username case insensitive
+    > fix routing / redirecting to manouvre between methods
+    > make username case insensitive
     
 5. slow hashing & salted
     use **bcrypt** library for hashing & salting

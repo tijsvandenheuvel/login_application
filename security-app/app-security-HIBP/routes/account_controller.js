@@ -18,9 +18,8 @@ accountRoutes.get('/register',function(req,res){
 
 accountRoutes.post('/register',function(req,res){
     var matched_users_promise = models.User.findAll({
-        where:  Sequelize.and(
-                {username: req.body.username}
-            )
+        where:{username: req.body.username}
+            
     });
     matched_users_promise.then(function(users){ 
         if(users.length == 0){
@@ -42,23 +41,25 @@ accountRoutes.post('/register',function(req,res){
 
 accountRoutes.post('/login',function(req,res){
     var matched_users_promise = models.User.findAll({
-        where: Sequelize.and(
-            {username: req.body.username},
-        )
+        where: {username: req.body.username}
     });
     matched_users_promise.then(function(users){ 
+        console.log(users);
         if(users.length > 0){
             let user = users[0];
             let passwordHash = user.password;
             if(bcrypt.compareSync(req.body.password,passwordHash)){
                 req.session.username = req.body.username;
+                console.log("joepie")
                 res.redirect('/');
             }
             else{
+                console.log("ai");
                 res.redirect('/register');
             }
         }
         else{
+            console.log("oei oei");
             res.redirect('/login');
         }
     });

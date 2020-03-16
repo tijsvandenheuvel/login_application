@@ -5,7 +5,7 @@ const https = require('https');
 const crypto = require('crypto');
 
 router.get('/login', function(req, res, next) {
-  res.render('login', {})
+  res.render('login', {error: ''})
 });
 
 router.get('/register', function(req, res, next) {
