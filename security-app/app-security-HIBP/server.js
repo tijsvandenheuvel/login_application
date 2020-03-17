@@ -9,7 +9,7 @@ var AccountRoutes = require('./routes/account_controller');
 var HomeRoutes = require('./routes/home_controller');
 
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3001;
 var app = express();
 
 app.set("views", path.join(__dirname, "views"));

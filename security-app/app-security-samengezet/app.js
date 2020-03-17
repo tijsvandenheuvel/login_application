@@ -6,11 +6,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+var AccountRoutes = require('./routes/account_controller');
+var HomeRoutes = require('./routes/home_controller');
+
 var port = process.env.PORT || 3000;
 var app = express();
 
-var AccountRoutes = require('./routes/account_controller');
-var HomeRoutes = require('./routes/home_controller');
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -28,13 +29,8 @@ app.use(session({
   secure:false 
 }));
 
-app.use("/", AccountRoutes.AccountRoutes);
-app.use("/home", HomeRoutes.HomeRoutes);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+app.use('/',AccountRoutes.AccountRoutes);
+//app.use("/home", HomeRoutes.HomeRoutes);
 
 app.use(function(req,res,next){
   if(req.session.username == null || req.session.username.length ==0 ){
@@ -43,6 +39,12 @@ app.use(function(req,res,next){
   else{
     next();
   }
+});
+app.use('/',HomeRoutes.HomeRoutes);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
 // error handler

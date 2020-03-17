@@ -61,7 +61,7 @@ deploy application on internet
     
 5. slow hashing & salted
     use **bcrypt** library for hashing & salting
-    >implement BCrypt hash 
+
 
 6. write database connection & queries
     authenticate by checking username & password in database
@@ -77,8 +77,6 @@ deploy application on internet
 7. create the checks
    - NIST (passwoord tussen 8 en 64 tekens)
    - HIBP: eerst hashen en dan check met API 
-  
-    > use generic error messages
 
 8. authorization
     session management
@@ -145,22 +143,24 @@ We use the **bcrypt** library/algorithm for hashing and salting passwords and se
 3. update session
 4. go to home screen
 
+### startup app 
+1. terminal in app-security-samengezet
+2. npm install 
+3. init local database
+   1. in config.json stel username & password in van uw MySQL 
+   2. node_modules/.bin/sequelize db:create
+   3. node_modules/.bin/sequelize db:migrate
+4. node app.js
+5. open localhost:3000
+
 
 ## TO DO 
 
-javascripts voor NIST checks        tijs
+zoek uit hoe deployen online  (AWS educate)   
 
-check HIBP API     hash & deel van hash door     jorg
+zoek uit hoe https & TLS certificaat fixe       
 
-zoek slow hashing & salting algo en zoek uit hoe ge gebruikt       tijs
-
-express persisteren naar mysql      tijs
-
-zoek uit hoe deployen online  (AWS educate)     jorg
-
-zoek uit hoe https certificaat fixe         jorg
-
-theorie en andere security guidelines tijs & jorg
+theorie en andere security guidelines 
 
 ## sources
 

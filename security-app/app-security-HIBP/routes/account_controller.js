@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var ejs = require('ejs');
 var path = require('path');
 var session = require('express-session');
-var models = require('../sequelize_backend/models');
+var models = require('../models');
 var Sequelize = require('sequelize');
 const bcrypt = require('bcrypt');
 
