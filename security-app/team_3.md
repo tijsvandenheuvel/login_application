@@ -73,34 +73,17 @@ deploy application on internet
     use **sequelize** for programming queries
     we use parameterised queries to counter SQL-injection
 
-    > use generic error messages
-
 7. create the checks
    - NIST: password must contain 8-64 characters.
    - HIBP: check if given password is blacklisted by HIBP.
 
 8. authorization
     session management
-    token management
-    
-    application flow
+    We use a UUID for a unique session ID
+    We use **express session** library for managing sessions
+    When you set cookie option secure true then https is required
 
-    **express session** library for managing sessions
-
-    **OpenIDConnect** protocol implemented with **onelogin-oidc-node** library 
-    - identity token
-    - acces token
-
-    cookie option secure: true -> https required
-    session:
-        secret: 'thisisthecookiesecret',
-        resave: false,
-        saveUninitialized: true,
-        cookie: { secure: true }
-    > figure out correct cookie / session options
-
-    > zoek uit: session store ? 
-    
+    We use default in memory session storage 
 
 9. deploy application 
     We will use Heroku to deploy our application.
