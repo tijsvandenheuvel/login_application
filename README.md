@@ -1,7 +1,9 @@
 # secure login application
 
 authors:
+
 Tijs Van den Heuvel (tijsvandenheuvel)
+
 Jorg Vergracht  (jorgvergracht)
 
 [link to live application](https://jorg-tijs-taak.herokuapp.com)

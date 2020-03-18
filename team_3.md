@@ -1,7 +1,9 @@
 # security app document
 
 authors:
+
 Tijs Van den Heuvel
+
 Jorg Vergracht
 
 [link to source code](https://github.com/tijsvandenheuvel/team_3_secure_login)
