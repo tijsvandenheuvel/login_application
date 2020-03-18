@@ -6,7 +6,7 @@ Jorg Vergracht  (jorgvergracht)
 
 [link to live application](https://jorg-tijs-taak.herokuapp.com)
 
-[link to more info](https://github.com/tijsvandenheuvel/team_3_secure_login/../../../../team_3.md)
+[link to more info](team_3.md)
 
 ## setup for local hosting
 
