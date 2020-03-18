@@ -36,13 +36,13 @@ app.use(session({
   genid: function(req){return v4()},
   cookie:{
     httpOnly:true,
-    secure:false,
+    secure:true,
     sameSite:true,
     maxAge:600000
   },
   resave: true,
   saveUninitialized: true, 
-  secure: false
+  secure: true
 }));
 
 app.use('/',AccountRoutes.AccountRoutes);
