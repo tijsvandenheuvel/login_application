@@ -12,7 +12,7 @@ Jorg Vergracht
 
 ## assignment
 
-We have to make a web application where
+create a web application where
 
 - users can register themselves with a username and password
 - users can authenticate themselves using their registered username and password.
@@ -32,68 +32,73 @@ deploy application on internet
 
 1. figure out scope & work
 
-   - html login & register page
+   - html login, register and home page
    - check if given password complies to NIST guidelines
    - connect to HIBP-API to validate with blacklist
    - connect to mySQL database
    - implement slow & salted hashing algorithm with bcrypt
-   - session mgmt with browser cookies
-   - https connection with TLS certificate
+   - session management with browser cookies
+   - https connection
+   - deploy application
 
 2. make front end web page
    create html pages with **ejs** view engine
-
    - login form
    - register form
    - home / index page
 
-3. establish secure connection
-   only send passwords using strong transport: **TLS** + **https**
-   this ensures encrypted session ID token
+3. create authentication middleware
+   We created an **Express.js** project in a **Node.js** environment. 
 
-4. create authentication middleware
-   We will create an **Express.js** file for middleware (app.js),
-   and establish a connection with a **MySQL** database.
    These are the node libraries we will use:
-
    - express-session: store & acces sessions with browser cookies
    - bcrypt: hash & salt password
    - sequelize: ORM to manage models & migrations
    - ejs: view engine to add node code to html
    - mysql2: used by sequelize to communicate to Mysql
 
-   Login & register requests are handled by account_controller.js.
+   Login and register requests are handled by account_controller.js.
 
-   > fix routing / redirecting to manouvre between methods
-   > make username case insensitive
+   Logout & home page request are handled by home_controller.js
 
-5. slow hashing & salted
-   We will use the **bcrypt** library for hashing & salting.
+4. slow hashing & salted
+   We will use the **bcrypt** library for hashing & salting the password for secure storage.
 
-6) write database connection & queries
-   If someone tries to log in, we will authenticate the user by checking username & password in database:
+5. write database connection & queries
+   We made a connection with a **MySQL** database.
 
+   database queries: 
    - check if username is in db
    - check if username & hashedpassword are same as in database
    - post username & hashedpassword
 
    use **sequelize** for programming queries
+
    we use parameterised queries to counter SQL-injection
 
-7) create the checks
+6. create the checks
+    NIST: password must contain 8-64 characters.
 
-   - NIST: password must contain 8-64 characters.
-   - HIBP: check if given password is blacklisted by HIBP.
+    HIBP: check if given password is blacklisted by HIBP.
+    connect with HIBP API
 
-8) authorization
+7. authorization
    session management
-   We use a UUID for a unique session ID
+
    We use **express session** library for managing sessions
+
+   We use a UUID for a unique session ID
+
    When you set cookie option secure true then https is required
 
    We use default in memory session storage
 
-9) deploy application
+8.  establish secure connection
+   only send passwords using strong transport: **TLS** + **https**
+
+   this ensures encrypted session ID token
+
+11. deploy application
    We will use Heroku to deploy our application.
 
 ## results
@@ -107,14 +112,18 @@ We use **sequelize** for Object Relational Mapping with Node
 
 We use the **bcrypt** library/algorithm for hashing and salting passwords and securely storing and checking with database
 
+We use **express-session** for session management
+
+We use **Heroku** to deploy the application
+
 ### application flow
 
 1. startup with node server.js
-1. init express
-1. init session
-1. if no logged in session redirect to register page
-1. if logged in redirect to homepage
-1. login & register requests handled by account_controller
+2. init express
+3. init session
+4. if no logged in session redirect to register page
+5. if logged in redirect to homepage
+6. login & register requests handled by account_controller
 
 ### register flow
 
