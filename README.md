@@ -5,9 +5,10 @@ Tijs Van den Heuvel (tijsvandenheuvel)
 Jorg Vergracht  (jorgvergracht)
 
 [link to live application](https://jorg-tijs-taak.herokuapp.com)
+
 [link to more info](https://github.com/tijsvandenheuvel/team_3_secure_login/../../../../team_3.md)
 
-## setup
+## setup for local hosting
 
 1. download source code
 2. terminal in security-app
