@@ -75,8 +75,9 @@ accountRoutes.post('/register',function(req,resp){
                                 username: req.body.username,
                                 password: passwordHash
                             }).then(function(){
+                                //req.session.regenerate();
                                 req.session.username = req.body.username;
-                                resp.redirect('/login');
+                                resp.redirect('/home');
                             });
                         }
                         /*username bestaat al */
@@ -103,6 +104,7 @@ accountRoutes.post('/login',function(req,res){
             let user = users[0];
             let passwordHash = user.password;
             if(bcrypt.compareSync(req.body.password,passwordHash)){
+                //req.session.regenerate();
                 req.session.username = req.body.username;
                 res.redirect('/home');
             }

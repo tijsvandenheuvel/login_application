@@ -86,9 +86,7 @@ deploy application on internet
 
     **express session** library for managing sessions
 
-    **passport.js** or **Auth0** frameworks ?
-
-    **OpenIDConnect** protocol
+    **OpenIDConnect** protocol implemented with **onelogin-oidc-node** library 
     - identity token
     - acces token
 
@@ -150,7 +148,7 @@ We use the **bcrypt** library/algorithm for hashing and salting passwords and se
    1. in config.json stel username & password in van uw MySQL 
    2. node_modules/.bin/sequelize db:create
    3. node_modules/.bin/sequelize db:migrate
-4. node app.js
+4. node app.js  of  npm start
 5. open localhost:3000
 
 

@@ -1,17 +1,22 @@
-var createError = require("http-errors");
 var express = require("express");
+var createError = require("http-errors");
 var session = require('express-session');
 var expressValidator = require('express-validator');
 var path = require("path");
 var cookieParser = require("cookie-parser");
+var bodyParser = require('body-parser');
 var logger = require("morgan");
+const {v4} = require("uuid");
+//const redis = require('redis');
+//const redisStore = require('connect-redis')(session);
+//const client  = redis.createClient();
 
 var AccountRoutes = require('./routes/account_controller');
 var HomeRoutes = require('./routes/home_controller');
 
 var port = process.env.PORT || 3000;
-var app = express();
 
+var app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -22,11 +27,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+//if app behind a proxy
+//app.set('trust proxy',1);
+
 app.use(session({
-  secret: 'randomstringsessionsecret',
+  secret: ['randomstringsessionsecret','anothersecret','nogeensecret'],
+  genid: function(req){return v4()},
+  cookie:{
+    httpOnly:true,
+    secure:false,
+    sameSite:true,
+    maxAge:600000
+  },
   resave: true,
   saveUninitialized: true, 
-  secure:false 
+  secure: false
 }));
 
 app.use('/',AccountRoutes.AccountRoutes);
@@ -40,7 +56,8 @@ app.use(function(req,res,next){
     next();
   }
 });
-app.use('/home',HomeRoutes.HomeRoutes);
+
+app.use('/home' ,HomeRoutes.HomeRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
