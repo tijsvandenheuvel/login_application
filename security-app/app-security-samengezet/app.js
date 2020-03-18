@@ -36,7 +36,7 @@ app.use(session({
   genid: function(req){return v4()},
   cookie:{
     httpOnly:true,
-    secure:true,
+    secure:false,
     sameSite:true,
     maxAge:600000
   },
