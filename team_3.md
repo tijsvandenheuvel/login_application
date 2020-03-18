@@ -62,10 +62,12 @@ deploy application on internet
    Logout & home page request are handled by home_controller.js
 
 4. slow hashing & salted
+   
    We will use the **bcrypt** library for hashing & salting the password for secure storage.
 
 5. write database connection & queries
-   We made a connection with a **MySQL** database.
+   
+   We will make a connection with a **MySQL** database.
 
    database queries: 
    - check if username is in db
