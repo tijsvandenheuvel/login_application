@@ -125,7 +125,7 @@ We use the **bcrypt** library/algorithm for hashing and salting passwords and se
 4. go to home screen
 
 ### startup app 
-1. terminal in app-security-samengezet
+1. terminal in security-app
 2. npm install 
 3. init local database
    1. in config.json stel username & password in van uw MySQL 
