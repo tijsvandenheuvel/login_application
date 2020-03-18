@@ -60,7 +60,7 @@ accountRoutes.post('/register',function(req,resp){
                 console.log('No matches found!');
                 
                 /*8 karakters of meer */
-                if(req.body.password.length >= 8){
+                if(req.body.password.length >= 8 && req.body.password.length <= 64){
 
                     var matched_users_promise = models.User.findAll({
                     where:{username: req.body.username}
@@ -88,7 +88,7 @@ accountRoutes.post('/register',function(req,resp){
                 }
                 /*minder dan 8 karakters*/
                 else{
-                    resp.render('register', {error: "Password must be at least 8 characters long."})
+                    resp.render('register', {error: "Password must be at least 8 characters long, and can't be longer than 64 characters."})
                 }
             }
     }
