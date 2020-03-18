@@ -9,13 +9,13 @@ Jorg Vergracht
 
 ## assignment
 
-a web application where 
+We have to make a web application where 
 - users can register themselves with a username and password
 - users can authenticate themselves using their registered username and password. 
 
-the application should securely store passwords
+The application should securely store passwords
 
-passwords conforms to NIST guidelines
+passwords must conform to NIST guidelines
 [doc](https://pages.nist.gov/800-63-3/sp800-63b.html) section 5.1.1.1
 
 the passwords from [HIBP](https://haveibeenpwned.com/) should be used as blacklist 
@@ -30,8 +30,8 @@ deploy application on internet
    - html login & register page
    - check if given password complies to NIST guidelines
    - connect to HIBP-API to validate with blacklist
-   - connection to database 
-   - implement slow & salted hashing algorithm bcrypt
+   - connect to mySQL database 
+   - implement slow & salted hashing algorithm with bcrypt
    - session mgmt with browser cookies
    - https connection with TLS certificate
 
@@ -46,25 +46,26 @@ deploy application on internet
     this ensures encrypted session ID token
 
 4. create authentication middleware
-    create **Express.js** file for middleware (server.js) 
-    establish connection with **MySQL** database
+    We will create an **Express.js** file for middleware (app.js), 
+    and establish a connection with a **MySQL** database. 
+    These are the node libraries we will use: 
     - express-session: store & acces sessions with browser cookies
     - bcrypt: hash & salt password
     - sequelize: ORM to manage models & migrations
     - ejs: view engine to add node code to html
     - mysql2: used by sequelize to communicate to Mysql 
 
-    login & register requests handled by account_controller.js
+    Login & register requests are handled by account_controller.js.
 
     > fix routing / redirecting to manouvre between methods
     > make username case insensitive
     
 5. slow hashing & salted
-    use **bcrypt** library for hashing & salting
+    We will use the **bcrypt** library for hashing & salting.
 
 
 6. write database connection & queries
-    authenticate by checking username & password in database
+    If someone tries to log in, we will authenticate the user by checking username & password in database:
     - check if username is in db
     - check if username & hashedpassword are same as in database
     - post username & hashedpassword
@@ -75,8 +76,8 @@ deploy application on internet
     > use generic error messages
 
 7. create the checks
-   - NIST (passwoord tussen 8 en 64 tekens)
-   - HIBP: eerst hashen en dan check met API 
+   - NIST: password must contain 8-64 characters.
+   - HIBP: check if given password is blacklisted by HIBP.
 
 8. authorization
     session management
@@ -104,8 +105,7 @@ deploy application on internet
     
 
 9. deploy application 
-    > get HTTPS, TLS certificate
-    search & get free host provider
+    We will use Heroku to deploy our application.
 
 ## results
 
