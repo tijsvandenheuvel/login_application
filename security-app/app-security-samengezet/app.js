@@ -42,7 +42,7 @@ app.use(session({
   },
   resave: true,
   saveUninitialized: true, 
-  secure: true
+  secure: false
 }));
 
 app.use('/',AccountRoutes.AccountRoutes);
