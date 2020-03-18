@@ -52,7 +52,7 @@ accountRoutes.post('/register',function(req,resp){
             /*in HIBP database*/
             if (found) {
                 console.log(`Found ${found.count} matches! Password vulnerable!`);
-                resp.render('register', {error: 'This password is found in the HIBP database. Please choose another one.'})
+                resp.render('register', {error: 'This password has been found in the HIBP database. Please choose another one.'})
 
             } 
             /*niet in HIBP database*/
