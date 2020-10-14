@@ -10,6 +10,17 @@ Jorg Vergracht  (jorgvergracht)
 
 [link to more info](team_3.md)
 
+## project goal
+
+This was a school assignment for the course software security.
+
+The task was to create a web application where
+
+- users can register themselves with a username and password
+- users can authenticate themselves using their registered username and password.
+
+The application should securely store passwords
+
 ## setup for local hosting
 
 1. download source code
